@@ -1,0 +1,12 @@
+{
+  "provider": "21st.dev",
+  "components": {
+    "source": "github",
+    "repository": "21st-dev/magic-mcp"
+  },
+  "apiKey": "3d5d5aee7a9f542f6d115e1ddb8e0ea3912156958b219ce4f6d7b2b4d1ba2c40",
+  "settings": {
+    "autoConnect": true,
+    "theme": "light"
+  }
+} 

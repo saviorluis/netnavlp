@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Style Test Page</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap">
+  <style>
+    /* CSS Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8f9fa;
+      color: #1a1a2e;
+      min-height: 100vh;
+    }
+
+    /* Container */
+    .container-custom {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* Section */
+    .section {
+      padding: 4rem 0;
+    }
+
+    /* Button */
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      font-weight: 500;
+      transition: all 0.3s;
+      transform: scale(1);
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+    }
+
+    .btn-primary {
+      background-color: #0284c7;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: #0369a1;
+    }
+
+    /* Card */
+    .card {
+      background-color: white;
+      border-radius: 0.75rem;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      padding: 1.5rem;
+      transition: all 0.3s;
+    }
+
+    .card:hover {
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    /* Headings */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+    }
+
+    /* Text gradient */
+    .text-gradient {
+      background: linear-gradient(to right, #0284c7, #7c3aed);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+  </style>
+</head>
+<body>
+  <div class="section">
+    <div class="container-custom">
+      <h1>NetNav <span class="text-gradient">Style Test</span></h1>
+      <p style="margin-bottom: 2rem;">This page tests the basic styling for the NetNav landing page.</p>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+        <div class="card">
+          <h3>Card Example</h3>
+          <p>This is an example of a card component with hover effects.</p>
+        </div>
+        
+        <div class="card">
+          <h3>Another Card</h3>
+          <p>Cards are used throughout the landing page to display features and pricing.</p>
+        </div>
+        
+        <div class="card">
+          <h3>Third Card</h3>
+          <p>Each card has consistent styling and hover effects.</p>
+        </div>
+      </div>
+      
+      <div style="margin-bottom: 2rem;">
+        <h2>Button Examples</h2>
+        <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+          <button class="btn btn-primary">Primary Button</button>
+          <button class="btn" style="border: 2px solid #0284c7; color: #0284c7;">Outline Button</button>
+        </div>
+      </div>
+      
+      <div>
+        <h2>Typography</h2>
+        <h1>Heading 1</h1>
+        <h2>Heading 2</h2>
+        <h3>Heading 3</h3>
+        <p>Regular paragraph text</p>
+        <p><strong>Bold text</strong></p>
+        <p><em>Italic text</em></p>
+        <p><span class="text-gradient">Gradient text</span></p>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    console.log('Style test page loaded');
+  </script>
+</body>
+</html> 
