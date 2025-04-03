@@ -13,6 +13,8 @@ export default function MatrixRainDemo() {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [activeTab, setActiveTab] = useState('about');
+  const [subscribeError, setSubscribeError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   // Character sets
   const characterSets = [
@@ -33,12 +35,41 @@ export default function MatrixRainDemo() {
   // Set the default character set to Binary (index 0)
   const [activeCharSet, setActiveCharSet] = useState(0);
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    if (email) {
+    
+    if (!email || !email.includes('@')) {
+      setSubscribeError('Please enter a valid email address');
+      return;
+    }
+    
+    setIsSubmitting(true);
+    setSubscribeError('');
+    
+    try {
+      const response = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+      
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.message || 'Subscription failed');
+      }
+      
+      // Success! 
       setSubmitted(true);
-      // Here you would typically send the email to your backend
-      console.log('Email submitted:', email);
+      setEmail('');
+      console.log('Email submitted successfully:', email);
+    } catch (error) {
+      console.error('Error subscribing:', error);
+      setSubscribeError(error.message || 'Something went wrong. Please try again.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -133,7 +164,13 @@ export default function MatrixRainDemo() {
                               animate={{ opacity: 1, y: 0 }}
                               className="text-green-400 font-medium text-center"
                             >
-                              Thanks! We'll notify you when we launch.
+                              <div className="flex items-center justify-center mb-2">
+                                <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Thanks for subscribing!</span>
+                              </div>
+                              <p className="text-sm text-gray-300">We'll keep you updated with our latest news.</p>
                             </motion.div>
                           ) : (
                             <motion.form 
@@ -159,14 +196,23 @@ export default function MatrixRainDemo() {
                                   className="flex-1 px-4 py-2 bg-transparent border border-blue-500 text-white rounded-l-lg focus:outline-none focus:ring-1 focus:ring-blue-500"
                                   required
                                   autoFocus
+                                  disabled={isSubmitting}
                                 />
                                 <button 
                                   type="submit" 
-                                  className="px-4 py-2 bg-blue-600 text-white rounded-r-lg hover:bg-blue-700 transition-colors"
+                                  className={`px-4 py-2 text-white rounded-r-lg transition-colors ${
+                                    isSubmitting 
+                                      ? 'bg-blue-800 cursor-not-allowed' 
+                                      : 'bg-blue-600 hover:bg-blue-700'
+                                  }`}
+                                  disabled={isSubmitting}
                                 >
-                                  Join
+                                  {isSubmitting ? 'Joining...' : 'Join'}
                                 </button>
                               </div>
+                              {subscribeError && (
+                                <p className="text-red-400 text-sm mt-2">{subscribeError}</p>
+                              )}
                             </motion.form>
                           )}
                         </AnimatePresence>
