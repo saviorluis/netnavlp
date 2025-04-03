@@ -158,25 +158,32 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
           position: absolute;
           bottom: 1rem;
           right: 1rem;
-          z-index: 50 !important;
-          width: 2.5rem;
-          height: 2.5rem;
+          z-index: 999 !important; /* Maximum z-index */
+          width: 3rem;
+          height: 3rem;
           border-radius: 9999px;
-          background-color: rgba(31, 41, 55, 0.8);
+          background-color: rgba(59, 130, 246, 0.8);
           display: flex;
           align-items: center;
           justify-content: center;
-          color: rgb(209, 213, 219);
+          color: white;
           cursor: pointer;
           transition: all 0.2s;
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          border: 2px solid rgba(255, 255, 255, 0.4);
+          box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+          pointer-events: auto !important;
         }
 
         .flip-button:hover {
           color: white;
-          background-color: rgba(55, 65, 81, 0.9);
+          background-color: rgba(37, 99, 235, 0.9);
           transform: scale(1.1);
-          box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+        }
+
+        /* Override any conflicting styles */
+        .tilt-card * {
+          pointer-events: auto;
         }
       `}</style>
 
@@ -220,7 +227,7 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
 
               {showCard && (
                 <motion.div
-                  className="card-container relative z-20 w-full max-w-5xl mx-auto"
+                  className="card-container relative z-20 w-full max-w-5xl mx-auto tilt-card"
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ type: "spring", stiffness: 260, damping: 20 }}
@@ -450,33 +457,35 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                           <div className="absolute -top-8 -left-8 w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/10 to-blue-500/10 blur-xl"></div>
                         </div>
 
-                        {/* Flip button - Front */}
-                        <div
-                          className="flip-button"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            e.preventDefault();
-                            console.log("Front flip button clicked!");
-                            setIsFlipped(true);
-                          }}
-                          aria-label="Flip card"
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 w-5"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
+                        {/* Front card flip button - Outside the flipper container for better click handling */}
+                        {!isFlipped && (
+                          <div
+                            className="flip-button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              e.preventDefault();
+                              console.log("Front flip button clicked!");
+                              setIsFlipped(true);
+                            }}
+                            aria-label="Flip card"
                           >
-                            <path d="M17 1l4 4-4 4"></path>
-                            <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
-                            <path d="M7 23l-4-4 4-4"></path>
-                            <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
-                          </svg>
-                        </div>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-6 w-6"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path d="M17 1l4 4-4 4"></path>
+                              <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
+                              <path d="M7 23l-4-4 4-4"></path>
+                              <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
+                            </svg>
+                          </div>
+                        )}
                       </div>
 
                       {/* Back of card - Developer Profile */}
@@ -559,39 +568,36 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                         <div className="absolute -bottom-8 -right-8 w-32 h-32 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 blur-xl"></div>
                         <div className="absolute -top-8 -left-8 w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/10 to-blue-500/10 blur-xl"></div>
 
-                        {/* Flip button - Back */}
-                        <div
-                          className="flip-button"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            e.preventDefault();
-                            console.log("Back flip button clicked!");
-                            setIsFlipped(false);
-                          }}
-                          aria-label="Flip card back"
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 w-5"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
+                        {/* Back card flip button - Outside the flipper container for better click handling */}
+                        {isFlipped && (
+                          <div
+                            className="flip-button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              e.preventDefault();
+                              console.log("Back flip button clicked!");
+                              setIsFlipped(false);
+                            }}
+                            aria-label="Flip card back"
                           >
-                            <path d="M17 1l4 4-4 4"></path>
-                            <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
-                            <path d="M7 23l-4-4 4-4"></path>
-                            <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
-                          </svg>
-                        </div>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-6 w-6"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path d="M17 1l4 4-4 4"></path>
+                              <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
+                              <path d="M7 23l-4-4 4-4"></path>
+                              <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
+                            </svg>
+                          </div>
+                        )}
                       </div>
-                    </div>
-
-                    {/* Status indicator for debugging */}
-                    <div className="absolute top-0 left-0 text-xs text-white bg-black/50 px-2 py-1 rounded z-50" style={{ opacity: 0.7 }}>
-                      Card: {isFlipped ? 'Flipped' : 'Front'}
                     </div>
 
                     {/* Swipe/dismiss indicator with improved performance */}
@@ -652,21 +658,20 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
             style={{ willChange: 'opacity', transform: 'translateZ(0)' }}
           >
             <p className="text-sm mb-2">Scroll down to explore</p>
-            <a href="#main-content">
-              <svg
-                className="h-6 w-6 animate-bounce"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M19 14l-7 7m0 0l-7-7m7 7V3"
-                />
-              </svg>
-            </a>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 animate-bounce"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 14l-7 7m0 0l-7-7m7 7V3"
+              />
+            </svg>
           </motion.div>
         </div>
       </div>
