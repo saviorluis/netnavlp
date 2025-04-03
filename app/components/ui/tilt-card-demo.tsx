@@ -140,6 +140,44 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
           max-width: 90%;
           margin: 0 auto;
         }
+        
+        /* Card flip animation styles */
+        .card-flipper {
+          transition: transform 0.6s;
+          transform-style: preserve-3d;
+          position: relative;
+          width: 100%;
+          height: 100%;
+        }
+        
+        .card-flipper.flipped {
+          transform: rotateY(180deg);
+        }
+
+        .flip-button {
+          position: absolute;
+          bottom: 1rem;
+          right: 1rem;
+          z-index: 50 !important;
+          width: 2.5rem;
+          height: 2.5rem;
+          border-radius: 9999px;
+          background-color: rgba(31, 41, 55, 0.8);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: rgb(209, 213, 219);
+          cursor: pointer;
+          transition: all 0.2s;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .flip-button:hover {
+          color: white;
+          background-color: rgba(55, 65, 81, 0.9);
+          transform: scale(1.1);
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
       `}</style>
 
       <div className="container mx-auto px-4">
@@ -199,36 +237,23 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                     }}
                     springOptions={{
                       stiffness: 300,
-                      damping: 20,
-                      mass: 0.5,
+                      damping: 26,
+                      mass: 1,
                     }}
                   >
-                    {/* Spotlight effect */}
-                    <Spotlight
-                      className="z-10 from-purple-500/20 via-blue-500/10 to-transparent blur-2xl"
-                      size={300}
-                      springOptions={{
-                        stiffness: 300,
-                        damping: 20,
-                        mass: 0.5,
-                      }}
-                    />
+                    <Spotlight className="absolute inset-0 z-10" />
 
-                    <div
-                      className="card-flipper relative transition-transform duration-700 w-full h-full"
-                      style={{
-                        transformStyle: "preserve-3d",
-                        transform: isFlipped
-                          ? "rotateY(180deg)"
-                          : "rotateY(0deg)",
-                      }}
+                    {/* Card container with flip functionality */}
+                    <div 
+                      className={`card-flipper relative w-full h-full ${isFlipped ? 'flipped' : ''}`}
+                      style={{ transformStyle: "preserve-3d" }}
                     >
-                      {/* Front of card - BBPS Card */}
+                      {/* Front of card - BBPS Business Card */}
                       <div
                         className="card front relative z-20 p-8 bg-black text-white overflow-hidden rounded-xl shadow-2xl border border-gray-800"
                         style={{
                           backfaceVisibility: "hidden",
-                          position: isFlipped ? "absolute" : "relative",
+                          position: "relative",
                           width: "100%",
                           height: "100%",
                         }}
@@ -425,10 +450,15 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                           <div className="absolute -top-8 -left-8 w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/10 to-blue-500/10 blur-xl"></div>
                         </div>
 
-                        {/* Flip indicator */}
-                        <button
-                          className="absolute bottom-4 right-4 z-30 w-10 h-10 rounded-full bg-gray-800/80 flex items-center justify-center text-gray-300 hover:text-white"
-                          onClick={handleFlipCard}
+                        {/* Flip button - Front */}
+                        <div
+                          className="flip-button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            e.preventDefault();
+                            console.log("Front flip button clicked!");
+                            setIsFlipped(true);
+                          }}
                           aria-label="Flip card"
                         >
                           <svg
@@ -446,7 +476,7 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                             <path d="M7 23l-4-4 4-4"></path>
                             <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
                           </svg>
-                        </button>
+                        </div>
                       </div>
 
                       {/* Back of card - Developer Profile */}
@@ -529,10 +559,15 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                         <div className="absolute -bottom-8 -right-8 w-32 h-32 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 blur-xl"></div>
                         <div className="absolute -top-8 -left-8 w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/10 to-blue-500/10 blur-xl"></div>
 
-                        {/* Flip indicator */}
-                        <button
-                          className="absolute bottom-4 right-4 z-30 w-10 h-10 rounded-full bg-gray-800/80 flex items-center justify-center text-gray-300 hover:text-white"
-                          onClick={handleFlipCard}
+                        {/* Flip button - Back */}
+                        <div
+                          className="flip-button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            e.preventDefault();
+                            console.log("Back flip button clicked!");
+                            setIsFlipped(false);
+                          }}
                           aria-label="Flip card back"
                         >
                           <svg
@@ -550,8 +585,13 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                             <path d="M7 23l-4-4 4-4"></path>
                             <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
                           </svg>
-                        </button>
+                        </div>
                       </div>
+                    </div>
+
+                    {/* Status indicator for debugging */}
+                    <div className="absolute top-0 left-0 text-xs text-white bg-black/50 px-2 py-1 rounded z-50" style={{ opacity: 0.7 }}>
+                      Card: {isFlipped ? 'Flipped' : 'Front'}
                     </div>
 
                     {/* Swipe/dismiss indicator with improved performance */}

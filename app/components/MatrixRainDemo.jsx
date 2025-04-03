@@ -82,8 +82,15 @@ export default function MatrixRainDemo() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             className="text-center mb-12"
+            style={{ 
+              willChange: 'transform, opacity', 
+              transform: 'translateZ(0)',
+              position: 'relative',
+              zIndex: 20 
+            }}
+            viewport={{ once: true, margin: "-50px" }}
           >
-            <h2 className="text-4xl font-bold text-white mb-3 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">Digital Identity, Redefined</h2>
+            <h2 className="text-4xl font-bold text-white mb-3 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500" style={{ textShadow: '0 0 1px rgba(96, 165, 250, 0.5)' }}>Digital Identity, Redefined</h2>
             <p className="text-gray-300 max-w-3xl mx-auto mb-4">
               Seamlessly blend your professional persona into the digital realm with customizable virtual business cards.
             </p>
@@ -111,6 +118,13 @@ export default function MatrixRainDemo() {
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5 }}
+                  style={{ 
+                    willChange: 'transform, opacity', 
+                    transform: 'translateZ(0)',
+                    position: 'relative',
+                    zIndex: 10 
+                  }}
+                  viewport={{ once: true, margin: "-50px" }}
                 >
                   <div className="flex flex-col md:flex-row gap-6">
                     {/* Profile Section */}
