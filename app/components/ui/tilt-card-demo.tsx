@@ -7,88 +7,86 @@ import { motion, AnimatePresence } from "framer-motion";
 import MatrixRain from "./matrix-rain";
 
 export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
-  const [animationStage, setAnimationStage] = useState(0);
+  const [showWelcome, setShowWelcome] = useState(true);
   const [showCard, setShowCard] = useState(false);
-  const [userInteracted, setUserInteracted] = useState(false);
-  const [autoHideTimer, setAutoHideTimer] = useState<NodeJS.Timeout | null>(
-    null
-  );
   const [isFlipped, setIsFlipped] = useState(false);
 
-  // Animation stages timing
+  // Simplified animation sequence: show welcome message then card
   useEffect(() => {
-    if (userInteracted) return;
-
-    // Reverting to previous timing
-    const timings = [6000, 4000, 4000]; // 14 seconds total for animations + 3 seconds delay before card
-
-    if (animationStage < 2) {
+    if (showWelcome) {
+      // Show welcome message for 3 seconds then show card
       const timer = setTimeout(() => {
-        setAnimationStage((prev) => prev + 1);
-      }, timings[animationStage]);
-
-      return () => clearTimeout(timer);
-    } else if (animationStage === 2) {
-      // Show the card after a delay following the last animation
-      const timer = setTimeout(() => {
+        setShowWelcome(false);
         setShowCard(true);
-      }, timings[2] + 3000); // Additional 3 second delay
-
+      }, 3000);
+      
       return () => clearTimeout(timer);
     }
-  }, [animationStage, userInteracted]);
-
-  // Ensure the card stays displayed for longer
-  useEffect(() => {
-    if (showCard && !userInteracted) {
-      // Set a long display time for the card
-      const timer = setTimeout(() => {
-        // Only automatically hide if user hasn't interacted
-        if (!userInteracted) {
-          setShowCard(false);
-          setAnimationStage(0);
-        }
-      }, 90000); // Display for 90 seconds before restarting
-
-      setAutoHideTimer(timer);
-
-      return () => {
-        if (autoHideTimer) clearTimeout(autoHideTimer);
-      };
-    }
-  }, [showCard, userInteracted]);
+  }, [showWelcome]);
 
   // Handle card interaction
   const handleInteraction = () => {
-    setUserInteracted(true);
-    setShowCard(true);
-
-    // Clear any auto-hide timers
-    if (autoHideTimer) {
-      clearTimeout(autoHideTimer);
-      setAutoHideTimer(null);
+    if (showWelcome) {
+      // Skip welcome animation if user interacts
+      setShowWelcome(false);
+      setShowCard(true);
     }
   };
 
   // Handle card dismissal
   const handleDismissCard = () => {
-    setUserInteracted(false);
     setShowCard(false);
-    setAnimationStage(0);
-
-    // Clear any auto-hide timers
-    if (autoHideTimer) {
-      clearTimeout(autoHideTimer);
-      setAutoHideTimer(null);
-    }
+    setShowWelcome(true);
   };
 
   // Handle flipping the card
   const handleFlipCard = (e: React.MouseEvent) => {
     e.stopPropagation();
     setIsFlipped(!isFlipped);
-    console.log("Card flipped, new state:", !isFlipped); // Add logging to debug
   };
+
+  // Ensure elements remain visible on scroll
+  useEffect(() => {
+    // Function to handle scroll events
+    const handleScroll = () => {
+      // Skip animations and show card immediately when scrolling starts
+      if (showWelcome) {
+        setShowWelcome(false);
+        setShowCard(true);
+      }
+      
+      // Prevent any elements from being hidden when scrolling
+      const elementsToKeepVisible = document.querySelectorAll('.contact-info, .navigation-links, .card-container');
+      elementsToKeepVisible.forEach(el => {
+        if (el instanceof HTMLElement) {
+          el.style.visibility = 'visible';
+          el.style.opacity = '1';
+        }
+      });
+    };
+
+    // Add scroll event listener with a small threshold to detect initial scroll
+    let scrollY = window.scrollY;
+    const scrollThreshold = 5; // pixels of scroll to trigger the skip
+    
+    const handleScrollStart = () => {
+      // Only trigger on scroll beyond threshold
+      if (Math.abs(window.scrollY - scrollY) > scrollThreshold) {
+        handleScroll();
+      }
+      scrollY = window.scrollY;
+    };
+    
+    window.addEventListener('scroll', handleScrollStart, { passive: true });
+    
+    // Initial call to ensure visibility
+    handleScroll();
+    
+    // Cleanup
+    return () => {
+      window.removeEventListener('scroll', handleScrollStart);
+    };
+  }, [showWelcome, setShowWelcome, setShowCard]);
 
   return (
     <section
@@ -147,9 +145,9 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center justify-center">
           <div className="relative w-full max-w-3xl aspect-[2/1] mb-6">
-            {/* Matrix Rain in the background - only show during animation phase */}
+            {/* Matrix Rain in the background - only show during welcome message */}
             <div className="absolute inset-0 rounded-xl overflow-hidden z-0">
-              {!showCard && (
+              {showWelcome && (
                 <MatrixRain
                   fontSize={10}
                   color="white"
@@ -160,82 +158,36 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
               )}
             </div>
 
-            {/* Animation Sequence */}
+            {/* Modified Animation Sequence with better visibility handling */}
             <AnimatePresence mode="wait">
-              {!showCard ? (
+              {showWelcome && (
                 <motion.div
-                  key="animation"
+                  key="welcome"
                   className="absolute inset-0 flex flex-col items-center justify-center z-20"
-                  initial={{ opacity: 1 }}
-                  exit={{ opacity: 0, transition: { duration: 1.5 } }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0, transition: { duration: 0.5 } }}
                   onClick={handleInteraction}
                 >
-                  {animationStage === 0 && (
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 2 }}
-                      className="text-green-400 text-4xl font-mono text-center"
-                    >
-                      Big Brother Property Solutions
-                    </motion.div>
-                  )}
-
-                  {animationStage === 1 && (
-                    <motion.div className="space-y-4">
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1 }}
-                        className="text-white text-3xl font-bold text-center"
-                      >
-                        Luis Velasco
-                      </motion.div>
-
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1, delay: 1 }}
-                        className="text-white text-xl font-medium text-center"
-                      >
-                        Field Manager
-                      </motion.div>
-
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1, delay: 2 }}
-                        className="text-green-400 text-2xl font-mono text-center mt-4"
-                      >
-                        Nice to meet you!
-                      </motion.div>
-                    </motion.div>
-                  )}
-
-                  {animationStage === 2 && (
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 1 }}
-                      className="text-white text-lg text-center px-6"
-                    >
-                      <div className="inline-block px-6 py-2 bg-gradient-to-r from-green-800 to-green-600 rounded-lg">
-                        Loading your digital card...
-                      </div>
-                    </motion.div>
-                  )}
+                  <motion.div
+                    className="text-green-400 text-3xl font-mono text-center glow-text"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    Nice to meet you!
+                  </motion.div>
                 </motion.div>
-              ) : null}
+              )}
 
               {showCard && (
                 <motion.div
                   className="card-container relative z-20 w-full max-w-5xl mx-auto"
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8 }}
                   transition={{ type: "spring", stiffness: 260, damping: 20 }}
                   onClick={handleInteraction}
+                  style={{ willChange: 'transform', transform: 'translateZ(0)' }}
                 >
                   <Tilt
                     className="w-full perspective-1000"
@@ -602,8 +554,8 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                       </div>
                     </div>
 
-                    {/* Swipe/dismiss indicator */}
-                    {userInteracted && (
+                    {/* Swipe/dismiss indicator with improved performance */}
+                    {showCard && (
                       <motion.button
                         className="absolute top-4 right-4 z-30 w-8 h-8 rounded-full bg-gray-800/80 flex items-center justify-center text-gray-300 hover:text-white"
                         onClick={(e) => {
@@ -614,6 +566,7 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                         animate={{ opacity: 1 }}
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
+                        style={{ willChange: 'transform', transform: 'translateZ(0)' }}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -644,17 +597,19 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
             <a
               href="mailto:ncbbps@gmail.com"
               className="mt-6 inline-block px-6 py-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full text-white font-medium hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+              style={{ willChange: 'transform', transform: 'translateZ(0)' }}
             >
               Contact BBPS
             </a>
           </div>
 
-          {/* Scroll indicator */}
+          {/* Modified scroll indicator with better visibility */}
           <motion.div
             className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-white/70"
             initial={{ opacity: 0 }}
-            animate={{ opacity: [0, 1, 0] }}
+            animate={{ opacity: [0.5, 1, 0.5] }}
             transition={{ repeat: Infinity, duration: 2 }}
+            style={{ willChange: 'opacity', transform: 'translateZ(0)' }}
           >
             <p className="text-sm mb-2">Scroll down to explore</p>
             <a href="#main-content">

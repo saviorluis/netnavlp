@@ -91,20 +91,23 @@ const Features = () => {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
+          viewport={{ once: true, amount: 0.1, margin: "-100px" }}
           className="space-y-16"
+          style={{ willChange: 'transform', transform: 'translateZ(0)' }}
         >
           {/* Heading Section */}
           <div className="text-center max-w-3xl mx-auto">
             <motion.h2 
               variants={headingVariants}
               className="text-3xl md:text-4xl font-display font-bold mb-6"
+              style={{ willChange: 'transform', transform: 'translateZ(0)' }}
             >
               Everything You Need to Network <span className="bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">Effectively</span>
             </motion.h2>
             <motion.p 
               variants={headingVariants}
               className="text-lg md:text-xl text-gray-700 leading-relaxed"
+              style={{ willChange: 'transform', transform: 'translateZ(0)' }}
             >
               NetNav combines event management with powerful networking tools to help you build and maintain valuable professional relationships.
             </motion.p>
@@ -118,6 +121,14 @@ const Features = () => {
                 variants={featureVariants}
                 whileHover="hover"
                 className="card group bg-white relative border border-gray-100 hover:border-primary-200 transition-all"
+                style={{ willChange: 'transform', transform: 'translateZ(0)' }}
+                whileInView={{ 
+                  opacity: 1, 
+                  y: 0,
+                  transition: { duration: 0.5, ease: "easeOut" }
+                }}
+                initial={{ opacity: 0, y: 20 }}
+                viewport={{ once: true, margin: "-50px" }}
               >
                 {/* Feature Icon */}
                 <div className="mb-6 p-4 bg-gradient-to-br from-primary-50 to-primary-100 rounded-lg inline-block group-hover:bg-gradient-to-br group-hover:from-primary-100 group-hover:to-primary-200 transition-all">
@@ -140,10 +151,19 @@ const Features = () => {
           <motion.div 
             variants={headingVariants}
             className="text-center mt-16"
+            style={{ willChange: 'transform', transform: 'translateZ(0)' }}
+            whileInView={{ 
+              opacity: 1, 
+              y: 0,
+              transition: { duration: 0.5, ease: "easeOut" }
+            }}
+            initial={{ opacity: 0, y: 20 }}
+            viewport={{ once: true, margin: "-50px" }}
           >
             <a 
               href="#contact" 
               className="inline-flex items-center px-8 py-4 rounded-lg bg-gradient-to-r from-primary-600 to-secondary-600 text-white font-medium shadow-lg hover:shadow-xl transform transition-all hover:-translate-y-1"
+              style={{ willChange: 'transform', transform: 'translateZ(0)' }}
             >
               <span>Start Networking Smarter</span>
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import Hero from './components/Hero';
 import Features from './components/Features';
 import HowItWorks from './components/HowItWorks';
@@ -25,12 +25,45 @@ const TiltCardDemo = dynamic(
 );
 
 export default function Home() {
+  // Fix backdrop-filter issues on scroll
+  useEffect(() => {
+    // Reset body style and prevent backdrop filter issues
+    document.body.style.overflow = 'auto';
+    
+    // Fix for z-index stacking context issues
+    const fixBackdropFilters = () => {
+      const blurElements = document.querySelectorAll('.backdrop-blur-md, .bg-black\\/70');
+      blurElements.forEach(el => {
+        if (el instanceof HTMLElement) {
+          // Reset stacking context for backdrop filtered elements when scrolled into view
+          const rect = el.getBoundingClientRect();
+          const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+          if (isVisible) {
+            el.style.transform = 'translateZ(0)';
+            el.style.willChange = 'transform';
+          } else {
+            el.style.willChange = 'auto';
+          }
+        }
+      });
+    };
+    
+    // Initial call and add event listener
+    fixBackdropFilters();
+    window.addEventListener('scroll', fixBackdropFilters, { passive: true });
+    
+    // Clean up
+    return () => {
+      window.removeEventListener('scroll', fixBackdropFilters);
+    };
+  }, []);
+
   return (
     <main className="flex-1">
-      <div id="intro-animation">
+      <div id="intro-animation" className="relative z-10">
         <TiltCardDemo />
       </div>
-      <div id="main-content">
+      <div id="main-content" className="relative z-0">
         <Hero />
         <Features />
         <HowItWorks />
