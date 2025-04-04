@@ -168,12 +168,12 @@ export const SidebarLink = ({
     <Link
       href={link.href}
       className={cn(
-        "flex items-center justify-start gap-2 group/sidebar py-2",
+        "flex items-center justify-start gap-2 group/sidebar py-2 z-50",
         className
       )}
       {...props}
     >
-      {link.icon}
+      <div className="text-neutral-800 dark:text-neutral-200 z-50 opacity-100">{link.icon}</div>
       <motion.span
         animate={{
           display: animate ? (open ? "inline-block" : "none") : "inline-block",
