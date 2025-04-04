@@ -158,41 +158,53 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
           position: absolute;
           bottom: 1rem;
           right: 1rem;
-          z-index: 999 !important; /* Maximum z-index */
-          width: 3rem;
-          height: 3rem;
+          z-index: 9999 !important; /* Maximum z-index */
+          width: 4rem; /* Increased size for easier clicking */
+          height: 4rem; /* Increased size for easier clicking */
           border-radius: 9999px;
-          background-color: rgba(59, 130, 246, 0.8);
+          background-color: rgba(59, 130, 246, 0.9); /* More visible */
           display: flex;
           align-items: center;
           justify-content: center;
           color: white;
           cursor: pointer;
           transition: all 0.2s;
-          border: 2px solid rgba(255, 255, 255, 0.4);
-          box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+          border: 3px solid rgba(255, 255, 255, 0.7); /* More visible border */
+          box-shadow: 0 0 20px rgba(59, 130, 246, 0.7); /* More visible glow */
           pointer-events: auto !important;
+          transform: translateZ(50px) !important; /* Push forward in 3D space */
+          will-change: transform;
         }
 
         .flip-button:hover {
           color: white;
-          background-color: rgba(37, 99, 235, 0.9);
-          transform: scale(1.1);
-          box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+          background-color: rgba(37, 99, 235, 1); /* Fully opaque on hover */
+          transform: translateZ(50px) scale(1.1) !important; /* Maintain Z position while scaling */
+          box-shadow: 0 0 25px rgba(59, 130, 246, 0.8);
         }
 
         /* Override any conflicting styles */
         .tilt-card * {
           pointer-events: auto;
         }
+        
+        /* Ensure flip buttons are always clickable */
+        .flip-button * {
+          pointer-events: auto !important;
+        }
+        
+        /* Improve 3D card container */
+        .card-container {
+          isolation: isolate; /* Create a new stacking context */
+        }
       `}</style>
 
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center justify-center">
           <div className="relative w-full max-w-3xl aspect-[2/1] mb-6">
-            {/* Matrix Rain in the background - only show during welcome message */}
-            <div className="absolute inset-0 rounded-xl overflow-hidden z-0">
-              {showWelcome && (
+            {/* Only render the Matrix Rain container when needed */}
+            {showWelcome && (
+              <div className="absolute inset-0 rounded-xl overflow-hidden z-0">
                 <MatrixRain
                   fontSize={10}
                   color="white"
@@ -200,8 +212,8 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                   fadeOpacity={0.05}
                   speed={0.5}
                 />
-              )}
-            </div>
+              </div>
+            )}
 
             {/* Modified Animation Sequence with better visibility handling */}
             <AnimatePresence mode="wait">
@@ -227,7 +239,7 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
 
               {showCard && (
                 <motion.div
-                  className="card-container relative z-20 w-full max-w-5xl mx-auto tilt-card"
+                  className="card-container relative z-30 w-full max-w-5xl mx-auto tilt-card"
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ type: "spring", stiffness: 260, damping: 20 }}
@@ -459,7 +471,7 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
 
                         {/* Front card flip button - Outside the flipper container for better click handling */}
                         {!isFlipped && (
-                          <div
+                          <motion.div
                             className="flip-button"
                             onClick={(e) => {
                               e.stopPropagation();
@@ -467,15 +479,19 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                               console.log("Front flip button clicked!");
                               setIsFlipped(true);
                             }}
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.95 }}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
                             aria-label="Flip card"
                           >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
-                              className="h-6 w-6"
+                              className="h-8 w-8" /* Larger icon */
                               viewBox="0 0 24 24"
                               fill="none"
                               stroke="currentColor"
-                              strokeWidth="2"
+                              strokeWidth="2.5" /* Thicker stroke */
                               strokeLinecap="round"
                               strokeLinejoin="round"
                             >
@@ -484,7 +500,7 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                               <path d="M7 23l-4-4 4-4"></path>
                               <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
                             </svg>
-                          </div>
+                          </motion.div>
                         )}
                       </div>
 
@@ -570,7 +586,7 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
 
                         {/* Back card flip button - Outside the flipper container for better click handling */}
                         {isFlipped && (
-                          <div
+                          <motion.div
                             className="flip-button"
                             onClick={(e) => {
                               e.stopPropagation();
@@ -578,15 +594,19 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                               console.log("Back flip button clicked!");
                               setIsFlipped(false);
                             }}
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.95 }}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
                             aria-label="Flip card back"
                           >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
-                              className="h-6 w-6"
+                              className="h-8 w-8" /* Larger icon */
                               viewBox="0 0 24 24"
                               fill="none"
                               stroke="currentColor"
-                              strokeWidth="2"
+                              strokeWidth="2.5" /* Thicker stroke */
                               strokeLinecap="round"
                               strokeLinejoin="round"
                             >
@@ -595,7 +615,7 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                               <path d="M7 23l-4-4 4-4"></path>
                               <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
                             </svg>
-                          </div>
+                          </motion.div>
                         )}
                       </div>
                     </div>
