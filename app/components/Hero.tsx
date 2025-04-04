@@ -54,8 +54,8 @@ const Hero = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          {/* Left Column - Content */}
-          <div className="w-full md:w-1/2 lg:pr-8">
+          {/* Left Column - Content with higher z-index to appear above matrix effects */}
+          <div className="w-full md:w-1/2 lg:pr-8 relative z-50 bg-white/90 p-6 rounded-xl backdrop-blur-sm">
             <motion.h1 
               className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 text-gray-900"
               initial={{ y: 20, opacity: 0 }}
