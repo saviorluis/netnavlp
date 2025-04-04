@@ -547,18 +547,25 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                           {/* Navigation Links */}
                           <div className="flex flex-wrap justify-center gap-4 mb-8">
                             {[
-                              "Get Started",
+                              "Join Waiting List",
                               "About",
                               "Skills",
                               "Projects",
                               "Contact",
-                            ].map((item) => (
+                            ].map((item, index) => (
                               <a
                                 key={item}
-                                href={`#${item
-                                  .toLowerCase()
-                                  .replace(" ", "-")}`}
-                                className="px-3 py-1 rounded-full bg-blue-900/30 text-blue-300 hover:bg-blue-800/50 transition-colors text-sm"
+                                href={index === 0 ? "#hero" : `#${item.toLowerCase().replace(" ", "-")}`}
+                                onClick={index === 0 ? (e) => {
+                                  e.preventDefault();
+                                  // Focus on the hero email input
+                                  const emailInput = document.getElementById('hero-email-input');
+                                  if (emailInput) {
+                                    emailInput.scrollIntoView({ behavior: 'smooth' });
+                                    setTimeout(() => emailInput.focus(), 800);
+                                  }
+                                } : undefined}
+                                className={`px-3 py-1 rounded-full ${index === 0 ? 'bg-blue-600 text-white' : 'bg-blue-900/30 text-blue-300 hover:bg-blue-800/50'} transition-colors text-sm`}
                               >
                                 {item}
                               </a>

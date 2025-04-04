@@ -35,8 +35,20 @@ const Navbar = () => {
 
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <Link href="#contact" className="btn-primary text-sm">
-              Get Early Access
+            <Link 
+              href="#hero" 
+              className="btn-primary text-sm"
+              onClick={(e) => {
+                e.preventDefault();
+                // Focus on the hero email input
+                const emailInput = document.getElementById('hero-email-input');
+                if (emailInput) {
+                  emailInput.scrollIntoView({ behavior: 'smooth' });
+                  setTimeout(() => emailInput.focus(), 800);
+                }
+              }}
+            >
+              Join Waiting List
             </Link>
           </div>
 

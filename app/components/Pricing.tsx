@@ -109,14 +109,23 @@ const Pricing = () => {
               </ul>
               
               <a 
-                href="#contact" 
+                href="#hero" 
                 className={`block text-center py-2 px-4 rounded-lg font-medium transition-colors ${
                   plan.highlighted 
                     ? 'bg-primary-600 text-white hover:bg-primary-700' 
                     : 'border-2 border-primary-600 text-primary-600 hover:bg-primary-50'
                 }`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  // Focus on the hero email input
+                  const emailInput = document.getElementById('hero-email-input');
+                  if (emailInput) {
+                    emailInput.scrollIntoView({ behavior: 'smooth' });
+                    setTimeout(() => emailInput.focus(), 800);
+                  }
+                }}
               >
-                {plan.cta}
+                Join Waiting List
               </a>
             </motion.div>
           ))}

@@ -168,10 +168,19 @@ const HowItWorks = () => {
             className="text-center mt-10"
           >
             <a 
-              href="#contact" 
+              href="#hero" 
               className="inline-flex items-center px-8 py-4 rounded-lg bg-white border-2 border-primary-600 text-primary-600 font-medium shadow-lg hover:shadow-xl hover:bg-primary-50 transform transition-all hover:-translate-y-1"
+              onClick={(e) => {
+                e.preventDefault();
+                // Focus on the hero email input
+                const emailInput = document.getElementById('hero-email-input');
+                if (emailInput) {
+                  emailInput.scrollIntoView({ behavior: 'smooth' });
+                  setTimeout(() => emailInput.focus(), 800);
+                }
+              }}
             >
-              <span>Start Your Journey Now</span>
+              <span>Join Waiting List</span>
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
               </svg>

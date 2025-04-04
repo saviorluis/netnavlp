@@ -179,8 +179,18 @@ export default function PersonalCard() {
               </div>
             </div>
             
-            <button className="mt-8 w-full py-2 bg-primary-600 hover:bg-primary-500 text-white rounded-lg transition-colors text-sm">
-              Join Platform
+            <button 
+              className="mt-8 w-full py-2 bg-primary-600 hover:bg-primary-500 text-white rounded-lg transition-colors text-sm"
+              onClick={() => {
+                // Focus on the hero email input
+                const emailInput = document.getElementById('hero-email-input');
+                if (emailInput) {
+                  emailInput.scrollIntoView({ behavior: 'smooth' });
+                  setTimeout(() => emailInput.focus(), 800);
+                }
+              }}
+            >
+              Join Waiting List
             </button>
           </div>
           
