@@ -54,7 +54,7 @@ export function TiltFlipCardDemo({ title = "BBPS Digital Business Card" }) {
 
   // Front of card content - BBPS Business Card
   const frontContent = (
-    <div className="p-8 bg-black text-white overflow-hidden rounded-xl shadow-2xl border border-gray-800 h-full">
+    <div className="p-8 bg-black text-white overflow-hidden rounded-xl shadow-2xl border border-gray-800 h-full relative">
       <div className="card-layout flex flex-col md:flex-row items-stretch w-full h-full">
         <div className="left-section w-full md:w-2/5 mb-8 md:mb-0">
           <div className="logo text-center relative">
@@ -242,12 +242,22 @@ export function TiltFlipCardDemo({ title = "BBPS Digital Business Card" }) {
         <div className="absolute -bottom-8 -right-8 w-32 h-32 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 blur-xl"></div>
         <div className="absolute -top-8 -left-8 w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/10 to-blue-500/10 blur-xl"></div>
       </div>
+      
+      {/* Add Contact BBPS button at the bottom center */}
+      <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 z-50">
+        <a
+          href="#contact"
+          className="inline-block px-5 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm rounded-lg font-medium hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-center"
+        >
+          Contact BBPS
+        </a>
+      </div>
     </div>
   );
 
   // Back of card content - Developer Profile
   const backContent = (
-    <div className="p-8 bg-gray-900 text-white overflow-hidden rounded-xl shadow-2xl border border-gray-800 h-full">
+    <div className="p-8 bg-gray-900 text-white overflow-hidden rounded-xl shadow-2xl border border-gray-800 h-full relative">
       <div className="text-center mb-6">
         <div className="w-20 h-20 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center text-white text-2xl font-bold mb-4 mx-auto border-4 border-blue-400/30">
           LV
@@ -300,13 +310,13 @@ export function TiltFlipCardDemo({ title = "BBPS Digital Business Card" }) {
         </div>
       </div>
 
-      {/* Call to action button */}
-      <div className="text-center">
+      {/* Replace the old Contact Me button with Contact BBPS at the bottom center */}
+      <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 z-50">
         <a
           href="#contact"
-          className="mt-4 inline-block px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-medium hover:shadow-lg hover:-translate-y-1 transition-all duration-300 text-center"
+          className="inline-block px-5 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm rounded-lg font-medium hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-center"
         >
-          Contact Me
+          Contact BBPS
         </a>
       </div>
 
@@ -407,19 +417,6 @@ export function TiltFlipCardDemo({ title = "BBPS Digital Business Card" }) {
                 </motion.div>
               )}
             </AnimatePresence>
-          </div>
-
-          <div className="text-center max-w-lg">
-            <p className="text-gray-600 font-medium">
-              Interactive business card with 3D tilt effect and flip functionality. 
-              Hover to experience the tilt effect and click the flip button to see both sides.
-            </p>
-            <a
-              href="mailto:ncbbps@gmail.com"
-              className="mt-6 inline-block px-6 py-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full text-white font-medium hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
-            >
-              Contact BBPS
-            </a>
           </div>
 
           {/* Scroll indicator */}
