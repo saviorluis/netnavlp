@@ -49,13 +49,13 @@ const Hero = () => {
     <section id="hero" className="py-20 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
       <div className="container mx-auto px-4">
         <motion.div 
-          className="flex flex-col md:flex-row gap-12 items-center justify-center"
+          className="flex flex-col md:flex-row gap-12 items-center justify-center min-h-[600px]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
           {/* Left Column - Content with higher z-index to appear above matrix effects */}
-          <div className="w-full md:w-1/2 lg:pr-8 relative z-50 bg-gray-50/60 p-6 rounded-xl backdrop-blur-sm shadow-sm">
+          <div className="w-full md:w-1/2 lg:pr-8 relative z-50 bg-gray-50/60 p-6 rounded-xl backdrop-blur-sm shadow-sm self-center">
             <motion.h1 
               className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 text-gray-900"
               initial={{ y: 20, opacity: 0 }}
@@ -136,12 +136,12 @@ const Hero = () => {
           
           {/* Right Column - Globe Demo - ensure it's centered vertically */}
           <motion.div 
-            className="w-full md:w-1/2 relative flex items-center justify-center"
+            className="w-full md:w-1/2 relative flex items-center justify-center self-center"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
           >
-            <div className="relative w-full">
+            <div className="relative w-full max-w-xl mx-auto">
               {/* The interactive Globe Demo */}
               <GlobeDemo />
               
