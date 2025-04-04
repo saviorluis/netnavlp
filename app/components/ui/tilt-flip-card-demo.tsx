@@ -243,8 +243,8 @@ export function TiltFlipCardDemo({ title = "BBPS Digital Business Card" }) {
         <div className="absolute -top-8 -left-8 w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/10 to-blue-500/10 blur-xl"></div>
       </div>
       
-      {/* Add Contact BBPS button at the bottom center */}
-      <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 z-50">
+      {/* Add Contact BBPS button at the bottom left instead of center */}
+      <div className="absolute bottom-1 left-4 z-50">
         <a
           href="#contact"
           className="inline-block px-5 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm rounded-lg font-medium hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-center"
@@ -310,8 +310,8 @@ export function TiltFlipCardDemo({ title = "BBPS Digital Business Card" }) {
         </div>
       </div>
 
-      {/* Replace the old Contact Me button with Contact BBPS at the bottom center */}
-      <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 z-50">
+      {/* Replace the old Contact Me button with Contact BBPS at the bottom left */}
+      <div className="absolute bottom-1 left-4 z-50">
         <a
           href="#contact"
           className="inline-block px-5 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm rounded-lg font-medium hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-center"
@@ -418,6 +418,9 @@ export function TiltFlipCardDemo({ title = "BBPS Digital Business Card" }) {
               )}
             </AnimatePresence>
           </div>
+
+          {/* Empty space where the paragraph was */}
+          <div className="h-16 mb-4"></div>
 
           {/* Scroll indicator */}
           <motion.div

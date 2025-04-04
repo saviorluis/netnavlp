@@ -65,25 +65,12 @@ export function TiltFlipCard({
         /* Flip button container and label */
         .flip-button-container {
           position: absolute;
-          bottom: 1.5rem;
-          right: 1.5rem;
-          z-index: 9999;
+          bottom: 1rem;
+          right: 1rem;
+          z-index: 999;
           display: flex;
           flex-direction: column;
           align-items: center;
-          pointer-events: auto;
-        }
-
-        .flip-button-label {
-          background-color: rgba(0, 0, 0, 0.7);
-          color: white;
-          padding: 0.25rem 0.75rem;
-          border-radius: 1rem;
-          font-weight: bold;
-          font-size: 0.875rem;
-          margin-top: 0.5rem;
-          border: 1px solid rgba(255, 255, 255, 0.5);
-          box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
 
         .flip-button {
@@ -163,7 +150,6 @@ export function TiltFlipCard({
                   <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
                 </svg>
               </motion.div>
-              <div className="flip-button-label">FLIP CARD</div>
             </div>
           </Tilt>
         </div>
@@ -210,7 +196,6 @@ export function TiltFlipCard({
                   <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
                 </svg>
               </motion.div>
-              <div className="flip-button-label">FLIP BACK</div>
             </div>
           </Tilt>
         </div>
