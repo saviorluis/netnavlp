@@ -17,17 +17,8 @@ const Hero = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
-      // Here you would typically send the email to your backend
-      console.log('Email submitted:', email);
-      setIsSubmitted(true);
-      setEmail('');
-      
-      // Reset the submission state after 3 seconds
-      setTimeout(() => {
-        setIsSubmitted(false);
-      }, 3000);
-    }
+    // TODO: Add your email submission logic here
+    setIsSubmitted(true);
   };
 
   // Motion variants for staggered animations
@@ -71,8 +62,8 @@ const Hero = () => {
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.7 }}
             >
-              Connect & Network <br/>
-              <span className="bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">Effortlessly</span>
+              Network <br/>
+              <span className="bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">Navigator</span>
             </motion.h1>
             <motion.p
               className="text-xl text-gray-700 mb-8 leading-relaxed"
@@ -80,8 +71,8 @@ const Hero = () => {
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.7, delay: 0.1 }}
             >
-              Revolutionize how you network at events. Discover connections, 
-              exchange digital cards, and manage relationships all in one place.
+              The smarter way to connect at events. Build meaningful relationships and 
+              grow your professional network effortlessly.
             </motion.p>
             
             {/* Email signup form */}
@@ -94,6 +85,8 @@ const Hero = () => {
             >
               <input 
                 type="email" 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email" 
                 className="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-600 focus:border-transparent"
                 required
@@ -105,9 +98,19 @@ const Hero = () => {
                 type="submit"
                 className="px-6 py-3 bg-gradient-to-r from-primary-600 to-secondary-600 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5"
               >
-                Get Started
+                Get Early Access
               </button>
             </motion.form>
+            
+            {isSubmitted && (
+              <motion.p 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-primary-600 mt-2 text-sm"
+              >
+                Thanks! We'll be in touch soon.
+              </motion.p>
+            )}
             
             {/* Social proof */}
             <motion.div
@@ -127,7 +130,7 @@ const Hero = () => {
                   />
                 ))}
               </div>
-              <span className="ml-3 text-sm text-gray-600">Trusted by <span className="font-semibold">12,000+</span> event professionals</span>
+              <span className="ml-3 text-sm text-gray-600">Trusted by <span className="font-semibold">2,000+</span> event professionals</span>
             </motion.div>
           </div>
           
@@ -139,17 +142,17 @@ const Hero = () => {
             transition={{ duration: 0.7, delay: 0.3 }}
           >
             <div className="relative">
-              {/* Replace the existing content with the GlobeDemo */}
+              {/* The interactive Globe Demo */}
               <GlobeDemo />
               
               {/* Event Details Card - Below the Globe */}
               <motion.div
-                className="absolute bottom-0 left-0 right-0 p-6 bg-white shadow-lg rounded-b-xl"
+                className="mt-4 p-4 bg-white shadow-lg rounded-xl"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.8 }}
               >
-                <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center justify-between mb-2">
                   <div>
                     <h3 className="font-bold text-gray-800">Tech Summit 2023</h3>
                     <p className="text-sm text-gray-500">New York, NY • September 12-14</p>
@@ -188,13 +191,13 @@ const Hero = () => {
               
               {/* Decorative elements with animations */}
               <motion.div
-                className="absolute -bottom-6 -right-6 w-32 h-32 bg-secondary-100 rounded-lg z-0"
+                className="absolute -bottom-6 -right-6 w-20 h-20 bg-secondary-100 rounded-lg z-0"
                 initial={{ rotate: 0 }}
                 animate={{ rotate: 12 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               />
               <motion.div
-                className="absolute -top-6 -left-6 w-24 h-24 bg-primary-100 rounded-lg z-0"
+                className="absolute -top-6 -left-6 w-16 h-16 bg-primary-100 rounded-lg z-0"
                 initial={{ rotate: 0 }}
                 animate={{ rotate: -12 }}
                 transition={{ duration: 0.5, delay: 0.2 }}

@@ -2,8 +2,7 @@
 
 import createGlobe, { COBEOptions } from "cobe"
 import { useCallback, useEffect, useRef, useState } from "react"
-
-import { cn } from "@/lib/utils"
+import { cn } from "../../../lib/utils"
 
 const GLOBE_CONFIG: COBEOptions = {
   width: 800,
@@ -46,6 +45,7 @@ export function Globe({
   const pointerInteracting = useRef(null)
   const pointerInteractionMovement = useRef(0)
   const [r, setR] = useState(0)
+  const [isLoaded, setIsLoaded] = useState(false)
 
   const updatePointerInteraction = (value: any) => {
     pointerInteracting.current = value
@@ -79,30 +79,48 @@ export function Globe({
   }
 
   useEffect(() => {
-    window.addEventListener("resize", onResize)
-    onResize()
+    try {
+      window.addEventListener("resize", onResize)
+      onResize()
+      
+      if (!canvasRef.current) return;
+      
+      const globe = createGlobe(canvasRef.current, {
+        ...config,
+        width: width * 2,
+        height: width * 2,
+        onRender,
+      });
 
-    const globe = createGlobe(canvasRef.current!, {
-      ...config,
-      width: width * 2,
-      height: width * 2,
-      onRender,
-    })
+      // Ensure the globe is visible
+      setTimeout(() => {
+        if (canvasRef.current) {
+          canvasRef.current.style.opacity = "1";
+          setIsLoaded(true);
+        }
+      }, 500);
 
-    setTimeout(() => (canvasRef.current!.style.opacity = "1"))
-    return () => globe.destroy()
-  }, [])
+      return () => {
+        globe.destroy();
+        window.removeEventListener("resize", onResize);
+      };
+    } catch (error) {
+      console.error("Failed to initialize globe:", error);
+    }
+  }, []);
 
   return (
     <div
       className={cn(
-        "absolute inset-0 mx-auto aspect-[1/1] w-full max-w-[600px]",
+        "relative mx-auto aspect-[1/1] w-full h-full max-w-[400px] z-50",
         className,
       )}
+      style={{ pointerEvents: "auto" }}
     >
       <canvas
         className={cn(
-          "size-full opacity-0 transition-opacity duration-500 [contain:layout_paint_size]",
+          "w-full h-full opacity-0 transition-opacity duration-500 [contain:layout_paint_size]",
+          isLoaded ? "z-50" : "z-0"
         )}
         ref={canvasRef}
         onPointerDown={(e) =>
