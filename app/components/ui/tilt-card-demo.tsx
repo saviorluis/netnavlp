@@ -91,14 +91,31 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
   return (
     <section
       id="business-card"
-      className="py-16 w-full bg-gradient-to-br from-gray-900 to-black min-h-screen flex flex-col items-center justify-center relative overflow-hidden"
+      className="py-16 w-full bg-transparent min-h-screen flex flex-col items-center justify-center relative overflow-hidden"
     >
       <style jsx global>{`
+        #business-card {
+          background: transparent;
+          position: relative;
+        }
+        
+        #business-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: radial-gradient(circle at center, rgba(30, 41, 59, 0.3), rgba(15, 23, 42, 0.1));
+          z-index: -1;
+        }
+        
         .glow-text {
           text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
           animation: none;
           opacity: 1 !important;
         }
+        
         .heading-container {
           margin-bottom: 3rem;
           padding: 1.5rem;
@@ -158,44 +175,32 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
           position: absolute;
           bottom: 1rem;
           right: 1rem;
-          z-index: 9999 !important; /* Maximum z-index */
-          width: 4rem; /* Increased size for easier clicking */
-          height: 4rem; /* Increased size for easier clicking */
+          z-index: 999 !important; /* Maximum z-index */
+          width: 3rem;
+          height: 3rem;
           border-radius: 9999px;
-          background-color: rgba(59, 130, 246, 0.9); /* More visible */
+          background-color: rgba(59, 130, 246, 0.8);
           display: flex;
           align-items: center;
           justify-content: center;
           color: white;
           cursor: pointer;
           transition: all 0.2s;
-          border: 3px solid rgba(255, 255, 255, 0.7); /* More visible border */
-          box-shadow: 0 0 20px rgba(59, 130, 246, 0.7); /* More visible glow */
+          border: 2px solid rgba(255, 255, 255, 0.4);
+          box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
           pointer-events: auto !important;
-          transform: translateZ(50px) !important; /* Push forward in 3D space */
-          will-change: transform;
         }
 
         .flip-button:hover {
           color: white;
-          background-color: rgba(37, 99, 235, 1); /* Fully opaque on hover */
-          transform: translateZ(50px) scale(1.1) !important; /* Maintain Z position while scaling */
-          box-shadow: 0 0 25px rgba(59, 130, 246, 0.8);
+          background-color: rgba(37, 99, 235, 0.9);
+          transform: scale(1.1);
+          box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
         }
 
         /* Override any conflicting styles */
         .tilt-card * {
           pointer-events: auto;
-        }
-        
-        /* Ensure flip buttons are always clickable */
-        .flip-button * {
-          pointer-events: auto !important;
-        }
-        
-        /* Improve 3D card container */
-        .card-container {
-          isolation: isolate; /* Create a new stacking context */
         }
       `}</style>
 
