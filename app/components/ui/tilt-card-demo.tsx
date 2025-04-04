@@ -677,12 +677,6 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
             </AnimatePresence>
           </div>
 
-          <div className="text-center max-w-lg">
-            <p className="text-gray-400">
-              Interactive business card with 3D tilt effect and flip functionality. Hover to experience the tilt effect and click the flip button to see both sides.
-            </p>
-          </div>
-
           {/* Modified scroll indicator with better visibility */}
           <motion.div
             className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-white/70"
