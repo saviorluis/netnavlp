@@ -176,8 +176,8 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
           bottom: 1rem;
           right: 1rem;
           z-index: 999 !important; /* Maximum z-index */
-          width: 3rem;
-          height: 3rem;
+          width: 2.4rem;
+          height: 2.4rem;
           border-radius: 9999px;
           background-color: rgba(59, 130, 246, 0.8);
           display: flex;
@@ -474,6 +474,16 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                           <div className="absolute -top-8 -left-8 w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/10 to-blue-500/10 blur-xl"></div>
                         </div>
 
+                        {/* Add Contact BBPS button at the bottom center */}
+                        <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 z-50">
+                          <a
+                            href="#contact"
+                            className="inline-block px-5 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm rounded-lg font-medium hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-center"
+                          >
+                            Contact BBPS
+                          </a>
+                        </div>
+
                         {/* Front card flip button - Outside the flipper container for better click handling */}
                         {!isFlipped && (
                           <motion.div
@@ -492,11 +502,11 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                           >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
-                              className="h-8 w-8" /* Larger icon */
+                              className="h-5 w-5"
                               viewBox="0 0 24 24"
                               fill="none"
                               stroke="currentColor"
-                              strokeWidth="2.5" /* Thicker stroke */
+                              strokeWidth="2"
                               strokeLinecap="round"
                               strokeLinejoin="round"
                             >
@@ -575,13 +585,13 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                           </div>
                         </div>
 
-                        {/* Call to action button */}
-                        <div className="text-center">
+                        {/* Add Contact BBPS button at the bottom center */}
+                        <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 z-50">
                           <a
                             href="#contact"
-                            className="mt-4 inline-block px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-medium hover:shadow-lg hover:-translate-y-1 transition-all duration-300 text-center"
+                            className="inline-block px-5 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm rounded-lg font-medium hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-center"
                           >
-                            Contact Me
+                            Contact BBPS
                           </a>
                         </div>
 
@@ -607,11 +617,11 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                           >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
-                              className="h-8 w-8" /* Larger icon */
+                              className="h-5 w-5"
                               viewBox="0 0 24 24"
                               fill="none"
                               stroke="currentColor"
-                              strokeWidth="2.5" /* Thicker stroke */
+                              strokeWidth="2"
                               strokeLinecap="round"
                               strokeLinejoin="round"
                             >
@@ -662,16 +672,8 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
 
           <div className="text-center max-w-lg">
             <p className="text-gray-400">
-              Interactive business card with 3D tilt effect. Touch or hover to
-              experience the full 3D effect.
+              Interactive business card with 3D tilt effect and flip functionality. Hover to experience the tilt effect and click the flip button to see both sides.
             </p>
-            <a
-              href="mailto:ncbbps@gmail.com"
-              className="mt-6 inline-block px-6 py-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full text-white font-medium hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
-              style={{ willChange: 'transform', transform: 'translateZ(0)' }}
-            >
-              Contact BBPS
-            </a>
           </div>
 
           {/* Modified scroll indicator with better visibility */}
