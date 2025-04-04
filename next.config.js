@@ -13,8 +13,8 @@ const nextConfig = {
         headers: [
           {
             key: "Content-Security-Policy",
-            // Allow eval in both development and production modes
-            value: "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com data:; img-src 'self' data:; connect-src 'self'"
+            // Allow eval and ensure all necessary domains are included
+            value: "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com data:; img-src 'self' data:; connect-src 'self' localhost:*; worker-src 'self' blob:;"
           },
         ],
       },
@@ -28,6 +28,14 @@ const nextConfig = {
       ...config.resolve.alias,
       '@': path.resolve(__dirname)
     };
+    
+    // Allow the cobe library to work properly
+    config.module.rules.push({
+      test: /cobe\/dist\/index\.js/,
+      use: 'next-softline-loader',
+      type: 'javascript/auto',
+    });
+    
     return config;
   },
   // Just to be safe - ensure App Router is enabled
