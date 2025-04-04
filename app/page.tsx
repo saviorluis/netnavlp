@@ -19,8 +19,14 @@ const MatrixRainDemo = dynamic(
   { ssr: false }
 );
 
+// Import both card demos to allow switching between them
 const TiltCardDemo = dynamic(
   () => import('./components/ui/tilt-card-demo').then(mod => ({ default: mod.TiltCardDemo })),
+  { ssr: false }
+);
+
+const FlipCardDemo = dynamic(
+  () => import('./components/ui/flip-card-demo').then(mod => ({ default: mod.FlipCardDemo })),
   { ssr: false }
 );
 
@@ -61,7 +67,7 @@ export default function Home() {
   return (
     <main className="flex-1">
       <div id="intro-animation" className="relative z-10">
-        <TiltCardDemo />
+        <FlipCardDemo />
       </div>
       <div id="main-content" className="relative z-0">
         <Hero />
@@ -73,4 +79,4 @@ export default function Home() {
       </div>
     </main>
   );
-} 
+}
