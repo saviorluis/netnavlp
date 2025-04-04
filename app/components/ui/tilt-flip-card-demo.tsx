@@ -69,7 +69,7 @@ export function TiltFlipCardDemo({ title = "BBPS Digital Business Card" }) {
                 }}
               >
                 {/* Logo */}
-                <div className="w-60 h-60 md:w-[360px] md:h-[360px] relative mx-auto">
+                <div className="w-48 h-48 md:w-[280px] md:h-[280px] relative mx-auto">
                   <img
                     src="/bbps-logo.png"
                     alt="BBPS Logo"
@@ -136,7 +136,7 @@ export function TiltFlipCardDemo({ title = "BBPS Digital Business Card" }) {
               </motion.div>
             </div>
             <motion.p
-              className="company-name text-sm mt-4 text-[#CDB87C]"
+              className="company-name text-sm mt-4 text-[#CDB87C] font-semibold"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.8 }}
@@ -243,8 +243,8 @@ export function TiltFlipCardDemo({ title = "BBPS Digital Business Card" }) {
         <div className="absolute -top-8 -left-8 w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/10 to-blue-500/10 blur-xl"></div>
       </div>
       
-      {/* Add Contact BBPS button at the bottom left instead of center */}
-      <div className="absolute bottom-1 left-4 z-50">
+      {/* Add Contact BBPS button at the right side aligned with the layout */}
+      <div className="absolute bottom-[calc(50%-20px)] right-8 z-50">
         <a
           href="#contact"
           className="inline-block px-5 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm rounded-lg font-medium hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-center"
@@ -310,8 +310,8 @@ export function TiltFlipCardDemo({ title = "BBPS Digital Business Card" }) {
         </div>
       </div>
 
-      {/* Replace the old Contact Me button with Contact BBPS at the bottom left */}
-      <div className="absolute bottom-1 left-4 z-50">
+      {/* Replace the old Contact Me button with Contact BBPS at the right side aligned with the layout */}
+      <div className="absolute bottom-[calc(50%-20px)] right-8 z-50">
         <a
           href="#contact"
           className="inline-block px-5 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm rounded-lg font-medium hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-center"
