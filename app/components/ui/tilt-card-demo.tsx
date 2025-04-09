@@ -459,17 +459,15 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                           <div className="absolute -top-8 -left-8 w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/10 to-blue-500/10 blur-xl"></div>
                         </div>
 
-                        {/* Add Contact BBPS button at the bottom, aligned with flip button */}
-                        <div className="absolute bottom-8 left-[45%] z-[999]">
-                          <a
-                            href="https://www.bigbropros.com/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-block px-5 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm rounded-lg font-medium hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-center cursor-pointer"
-                            style={{ pointerEvents: 'auto', position: 'relative', zIndex: 999 }}
+                        {/* Contact BBPS button with improved structure */}
+                        <div className="absolute bottom-8 left-[45%] z-[999] pointer-events-auto">
+                          <button
+                            onClick={() => window.open('https://www.bigbropros.com/', '_blank', 'noopener,noreferrer')}
+                            className="inline-flex items-center justify-center px-5 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm rounded-lg font-medium hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-center cursor-pointer"
+                            style={{ position: 'relative', zIndex: 999 }}
                           >
-                            Contact BBPS
-                          </a>
+                            <span>Contact BBPS</span>
+                          </button>
                         </div>
 
                         {/* Front card flip button - Outside the flipper container for better click handling */}
@@ -580,17 +578,15 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                           </div>
                         </div>
 
-                        {/* Add Contact BBPS button at the bottom, aligned with flip button */}
-                        <div className="absolute bottom-8 left-[45%] z-[999]">
-                          <a
-                            href="https://www.bigbropros.com/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-block px-5 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm rounded-lg font-medium hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-center cursor-pointer"
-                            style={{ pointerEvents: 'auto', position: 'relative', zIndex: 999 }}
+                        {/* Contact BBPS button with improved structure */}
+                        <div className="absolute bottom-8 left-[45%] z-[999] pointer-events-auto">
+                          <button
+                            onClick={() => window.open('https://www.bigbropros.com/', '_blank', 'noopener,noreferrer')}
+                            className="inline-flex items-center justify-center px-5 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm rounded-lg font-medium hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-center cursor-pointer"
+                            style={{ position: 'relative', zIndex: 999 }}
                           >
-                            Contact BBPS
-                          </a>
+                            <span>Contact BBPS</span>
+                          </button>
                         </div>
 
                         {/* Card decorative elements */}
