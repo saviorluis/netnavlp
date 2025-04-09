@@ -46,7 +46,7 @@ export function Spotlight({
         className
       )}
       style={{
-        background: bgGradient,
+        background: bgGradient.get(),
         pointerEvents: "none",
         zIndex: 10
       }}
