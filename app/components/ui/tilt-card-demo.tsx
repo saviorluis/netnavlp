@@ -460,13 +460,13 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                         </div>
 
                         {/* Contact BBPS button with improved structure */}
-                        <div className="absolute bottom-8 left-[45%] z-[999] pointer-events-auto">
+                        <div className="absolute bottom-8 left-[45%] z-[9999] pointer-events-auto">
                           <button
                             onClick={() => window.open('https://www.bigbropros.com/', '_blank', 'noopener,noreferrer')}
-                            className="inline-flex items-center justify-center px-5 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm rounded-lg font-medium hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-center cursor-pointer"
-                            style={{ position: 'relative', zIndex: 999 }}
+                            className="relative inline-flex items-center justify-center px-5 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm rounded-lg font-medium hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-center cursor-pointer"
+                            style={{ position: 'relative', zIndex: 9999 }}
                           >
-                            <span>Contact BBPS</span>
+                            <span className="relative z-[9999]">Contact BBPS</span>
                           </button>
                         </div>
 
@@ -579,13 +579,13 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                         </div>
 
                         {/* Contact BBPS button with improved structure */}
-                        <div className="absolute bottom-8 left-[45%] z-[999] pointer-events-auto">
+                        <div className="absolute bottom-8 left-[45%] z-[9999] pointer-events-auto">
                           <button
                             onClick={() => window.open('https://www.bigbropros.com/', '_blank', 'noopener,noreferrer')}
-                            className="inline-flex items-center justify-center px-5 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm rounded-lg font-medium hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-center cursor-pointer"
-                            style={{ position: 'relative', zIndex: 999 }}
+                            className="relative inline-flex items-center justify-center px-5 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm rounded-lg font-medium hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-center cursor-pointer"
+                            style={{ position: 'relative', zIndex: 9999 }}
                           >
-                            <span>Contact BBPS</span>
+                            <span className="relative z-[9999]">Contact BBPS</span>
                           </button>
                         </div>
 
