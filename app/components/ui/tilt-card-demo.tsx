@@ -91,36 +91,98 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
   return (
     <section
       id="business-card"
-      className="py-8 w-full min-h-screen flex items-center justify-center relative overflow-hidden"
+      className="w-full min-h-[100dvh] flex items-center justify-center bg-black/20"
     >
       <style jsx global>{`
         #business-card {
           position: relative;
-          min-height: 100vh;
           width: 100%;
         }
         
+        /* Desktop styles */
+        .card-container {
+          width: 100%;
+          max-width: 420px;
+          margin: 0 auto;
+        }
+
+        .card-layout {
+          background: rgba(0, 0, 0, 0.95);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 1rem;
+          padding: 2rem;
+        }
+
+        .logo-section img {
+          max-width: 120px;
+          height: auto;
+        }
+
+        .company-name {
+          font-size: 1rem;
+        }
+
+        .name {
+          font-size: 2xl;
+        }
+
+        .title {
+          font-size: 1.25rem;
+        }
+
+        .contact-info {
+          font-size: 1rem;
+        }
+        
+        /* Mobile styles - only apply below 768px */
         @media (max-width: 768px) {
           #business-card {
             padding: 1rem;
+            min-height: 100dvh;
           }
 
           .card-container {
-            width: 100% !important;
-            max-width: 100% !important;
+            width: 90% !important;
+            max-width: 320px !important;
+            margin: 0 auto;
             min-height: auto !important;
-            transform: none !important;
-          }
-
-          .tilt-card {
-            transform: none !important;
           }
 
           .card-layout {
-            background: rgba(0, 0, 0, 0.95);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 1rem;
             padding: 1.5rem;
+          }
+
+          .logo-section img {
+            max-width: 80px;
+          }
+
+          .company-name {
+            font-size: 0.875rem !important;
+          }
+
+          .name {
+            font-size: 1.5rem !important;
+          }
+
+          .title {
+            font-size: 1rem !important;
+          }
+
+          .contact-info {
+            font-size: 0.875rem !important;
+          }
+
+          .contact-info .w-8 {
+            width: 1.5rem !important;
+          }
+
+          .contact-info .h-8 {
+            height: 1.5rem !important;
+          }
+
+          button {
+            font-size: 0.875rem !important;
+            padding: 0.5rem 1rem !important;
           }
         }
         
@@ -229,8 +291,8 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
         }
       `}</style>
 
-      <div className="w-full max-w-sm mx-auto px-4">
-        <div className="relative">
+      <div className="w-full max-w-[320px] mx-auto">
+        <div className="relative bg-black/80 rounded-xl p-4">
           {/* Matrix Rain container */}
           {showWelcome && (
             <div className="absolute inset-0 rounded-xl overflow-hidden">
@@ -252,15 +314,15 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ type: "spring", stiffness: 260, damping: 20 }}
             >
-              <div className="card-layout p-6">
+              <div className="card-layout p-4">
                 {/* Logo section */}
-                <div className="logo-section mb-8">
+                <div className="logo-section mb-6">
                   <div className="logo text-center">
                     <motion.div
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       transition={{ delay: 0.5, type: "spring", stiffness: 200 }}
-                      className="w-24 h-24 mx-auto"
+                      className="w-20 h-20 mx-auto"
                     >
                       <img
                         src="/bbps-logo.png"
@@ -269,7 +331,7 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                       />
                     </motion.div>
                     <motion.p
-                      className="company-name text-sm mt-3 text-[#CDB87C] font-semibold"
+                      className="company-name text-xs mt-2 text-[#CDB87C] font-semibold"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ delay: 0.8 }}
@@ -280,9 +342,9 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                 </div>
 
                 {/* Info section */}
-                <div className="info-section text-center space-y-6">
+                <div className="info-section text-center space-y-4">
                   <motion.h1
-                    className="name text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500"
+                    className="name text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                   >
@@ -290,14 +352,14 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                   </motion.h1>
 
                   <motion.p
-                    className="title text-lg text-gray-300"
+                    className="title text-base text-gray-300"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                   >
                     Field Manager
                   </motion.p>
 
-                  <div className="contact-info space-y-4">
+                  <div className="contact-info space-y-3">
                     {[
                       { icon: "phone", text: "(C) 336-624-7442" },
                       {
@@ -307,16 +369,16 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                     ].map((item, index) => (
                       <motion.div
                         key={index}
-                        className="flex items-center justify-center space-x-3"
+                        className="flex items-center justify-center space-x-2"
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.4 + index * 0.1 }}
                       >
-                        <div className="w-8 h-8 rounded-full bg-blue-900/40 flex items-center justify-center">
+                        <div className="w-6 h-6 rounded-full bg-blue-900/40 flex items-center justify-center">
                           {item.icon === "phone" && (
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
-                              className="w-4 h-4 text-blue-400"
+                              className="w-3 h-3 text-blue-400"
                               viewBox="0 0 24 24"
                               fill="none"
                               stroke="currentColor"
@@ -330,7 +392,7 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                           {item.icon === "map-pin" && (
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
-                              className="w-4 h-4 text-blue-400"
+                              className="w-3 h-3 text-blue-400"
                               viewBox="0 0 24 24"
                               fill="none"
                               stroke="currentColor"
@@ -343,7 +405,7 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                             </svg>
                           )}
                         </div>
-                        <p className="text-gray-300 text-sm break-words">
+                        <p className="text-gray-300 text-xs break-words flex-1">
                           {item.text}
                         </p>
                       </motion.div>
@@ -351,10 +413,10 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                   </div>
 
                   {/* Contact BBPS button */}
-                  <div className="mt-8">
+                  <div className="mt-6">
                     <button
                       onClick={() => window.open('https://www.bigbropros.com/', '_blank', 'noopener,noreferrer')}
-                      className="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm rounded-lg font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                      className="w-full px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-xs rounded-lg font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg"
                     >
                       Contact BBPS
                     </button>
