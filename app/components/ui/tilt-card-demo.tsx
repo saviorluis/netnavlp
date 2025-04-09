@@ -280,6 +280,7 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                           position: "relative",
                           width: "100%",
                           height: "100%",
+                          pointerEvents: "auto"
                         }}
                       >
                         <div className="card-layout flex flex-col md:flex-row items-stretch w-full">
@@ -459,12 +460,13 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                         </div>
 
                         {/* Add Contact BBPS button at the bottom, aligned with flip button */}
-                        <div className="absolute bottom-8 left-[45%] z-50">
+                        <div className="absolute bottom-8 left-[45%] z-[999]">
                           <a
                             href="https://www.bigbropros.com/"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-block px-5 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm rounded-lg font-medium hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-center pointer-events-auto"
+                            className="inline-block px-5 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm rounded-lg font-medium hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-center cursor-pointer"
+                            style={{ pointerEvents: 'auto', position: 'relative', zIndex: 999 }}
                           >
                             Contact BBPS
                           </a>
@@ -579,12 +581,13 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                         </div>
 
                         {/* Add Contact BBPS button at the bottom, aligned with flip button */}
-                        <div className="absolute bottom-8 left-[45%] z-50">
+                        <div className="absolute bottom-8 left-[45%] z-[999]">
                           <a
                             href="https://www.bigbropros.com/"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-block px-5 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm rounded-lg font-medium hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-center pointer-events-auto"
+                            className="inline-block px-5 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm rounded-lg font-medium hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-center cursor-pointer"
+                            style={{ pointerEvents: 'auto', position: 'relative', zIndex: 999 }}
                           >
                             Contact BBPS
                           </a>
