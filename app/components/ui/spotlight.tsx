@@ -9,7 +9,7 @@ import {
   SpringOptions,
   HTMLMotionProps,
 } from 'framer-motion';
-import { cn } from '@/lib/utils';
+import { cn } from '../../../lib/utils';
 
 interface SpotlightProps {
   size?: number;
