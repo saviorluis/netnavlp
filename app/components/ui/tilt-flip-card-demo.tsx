@@ -246,7 +246,9 @@ export function TiltFlipCardDemo({ title = "BBPS Digital Business Card" }) {
       {/* Add Contact BBPS button at the bottom, aligned with flip button, raised a bit - only on the front card */}
       <div className="absolute bottom-8 left-[45%] z-50">
         <a
-          href="mailto:ncbbps@gmail.com"
+          href="https://www.bigbropros.com/"
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-block px-5 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm rounded-lg font-medium hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-center"
         >
           Contact BBPS
