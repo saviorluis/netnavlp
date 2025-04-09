@@ -97,6 +97,80 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
         #business-card {
           background: transparent;
           position: relative;
+          min-height: 100vh;
+          padding: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+          #business-card {
+            padding: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .card-container {
+            transform: scale(0.9);
+            width: 100% !important;
+            max-width: 100% !important;
+          }
+
+          .card {
+            padding: 1rem !important;
+          }
+
+          .logo img {
+            width: 120px !important;
+            height: 120px !important;
+            margin: 0 auto;
+          }
+
+          .company-name {
+            font-size: 0.8rem !important;
+            margin-top: 0.5rem !important;
+          }
+
+          .name {
+            font-size: 1.75rem !important;
+            margin-bottom: 0.5rem !important;
+          }
+
+          .title {
+            font-size: 1.25rem !important;
+            margin-bottom: 1rem !important;
+          }
+
+          .contact-info {
+            font-size: 0.875rem !important;
+          }
+
+          .contact-info .flex {
+            margin-bottom: 0.5rem !important;
+          }
+
+          .navigation-links {
+            flex-wrap: wrap;
+            gap: 0.5rem !important;
+            justify-content: center;
+            padding: 0 0.5rem;
+          }
+
+          .navigation-links a {
+            font-size: 0.75rem !important;
+            padding: 0.25rem 0.75rem !important;
+          }
+
+          .flip-button {
+            width: 2rem !important;
+            height: 2rem !important;
+            bottom: 0.5rem !important;
+            right: 0.5rem !important;
+          }
+
+          .flip-button svg {
+            width: 1rem !important;
+            height: 1rem !important;
+          }
         }
         
         #business-card::before {
@@ -204,14 +278,14 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
         }
       `}</style>
 
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col items-center justify-center">
-          <div className="relative w-full max-w-3xl aspect-[2/1] mb-6">
-            {/* Only render the Matrix Rain container when needed */}
+          <div className="relative w-full max-w-3xl aspect-[3/2] md:aspect-[2/1] mb-6">
+            {/* Matrix Rain container with mobile adjustments */}
             {showWelcome && (
               <div className="absolute inset-0 rounded-xl overflow-hidden z-0">
                 <MatrixRain
-                  fontSize={10}
+                  fontSize={window.innerWidth < 768 ? 8 : 10}
                   color="white"
                   characters="01"
                   fadeOpacity={0.05}
@@ -249,7 +323,15 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ type: "spring", stiffness: 260, damping: 20 }}
                   onClick={handleInteraction}
-                  style={{ willChange: 'transform', transform: 'translateZ(0)' }}
+                  style={{ 
+                    willChange: 'opacity', 
+                    transform: 'translateZ(0)',
+                    backfaceVisibility: "hidden",
+                    position: "relative",
+                    width: "100%",
+                    height: "100%",
+                    pointerEvents: "auto"
+                  }}
                 >
                   <Tilt
                     className="w-full perspective-1000"
@@ -284,10 +366,9 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                         }}
                       >
                         <div className="card-layout flex flex-col md:flex-row items-stretch w-full">
-                          <div className="left-section w-full md:w-2/5 mb-8 md:mb-0">
+                          <div className="left-section w-full md:w-2/5 mb-4 md:mb-0">
                             <div className="logo text-center relative">
-                              {/* Removing the BBPS letters at the top */}
-                              <div className="house-icon mt-4 flex justify-center">
+                              <div className="house-icon mt-2 md:mt-4 flex justify-center">
                                 <motion.div
                                   initial={{ scale: 0 }}
                                   animate={{ scale: 1 }}
@@ -297,17 +378,14 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                                     stiffness: 200,
                                   }}
                                 >
-                                  {/* Fixed logo size to better fit the card */}
-                                  <div className="w-48 h-48 md:w-[280px] md:h-[280px] relative mx-auto">
+                                  <div className="w-32 h-32 md:w-48 md:h-48 relative mx-auto">
                                     <img
                                       src="/bbps-logo.png"
                                       alt="BBPS Logo"
                                       className="w-full h-full object-contain object-top"
                                       style={{
-                                        clipPath:
-                                          "inset(0 0 5%)" /* Crop less from the bottom to show the full S */,
-                                        transform:
-                                          "scale(0.9)" /* Reduce size by 10% */,
+                                        clipPath: "inset(0 0 5%)",
+                                        transform: "scale(0.9)",
                                       }}
                                       onError={(e) => {
                                         // Fallback to SVG if image not found
@@ -397,7 +475,7 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                               Field Manager
                             </motion.p>
 
-                            <div className="contact-info space-y-3 flex flex-col items-center">
+                            <div className="contact-info space-y-2 md:space-y-3 flex flex-col items-center text-sm md:text-base">
                               {[
                                 { icon: "phone", text: "(C) 336-624-7442" },
                                 {
@@ -459,11 +537,11 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                           <div className="absolute -top-8 -left-8 w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/10 to-blue-500/10 blur-xl"></div>
                         </div>
 
-                        {/* Contact BBPS button with similar structure to flip button */}
-                        <div className="absolute bottom-8 left-[45%] transform -translate-x-1/2">
+                        {/* Contact BBPS button with mobile adjustments */}
+                        <div className="absolute bottom-4 md:bottom-8 left-1/2 transform -translate-x-1/2">
                           <button
                             onClick={() => window.open('https://www.bigbropros.com/', '_blank', 'noopener,noreferrer')}
-                            className="relative px-5 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm rounded-lg font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                            className="relative px-4 md:px-5 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-xs md:text-sm rounded-lg font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg whitespace-nowrap"
                           >
                             Contact BBPS
                           </button>
@@ -577,11 +655,11 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                           </div>
                         </div>
 
-                        {/* Contact BBPS button with similar structure to flip button */}
-                        <div className="absolute bottom-8 left-[45%] transform -translate-x-1/2">
+                        {/* Contact BBPS button with mobile adjustments */}
+                        <div className="absolute bottom-4 md:bottom-8 left-1/2 transform -translate-x-1/2">
                           <button
                             onClick={() => window.open('https://www.bigbropros.com/', '_blank', 'noopener,noreferrer')}
-                            className="relative px-5 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm rounded-lg font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                            className="relative px-4 md:px-5 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-xs md:text-sm rounded-lg font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg whitespace-nowrap"
                           >
                             Contact BBPS
                           </button>
@@ -632,21 +710,57 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
             </AnimatePresence>
           </div>
 
-          {/* Empty space where the paragraph was */}
-          <div className="h-16 mb-4"></div>
+          {/* Adjust card layout for mobile */}
+          <div className="card-layout flex flex-col md:flex-row items-stretch w-full">
+            <div className="left-section w-full md:w-2/5 mb-4 md:mb-0">
+              {/* Logo section with mobile adjustments */}
+              <div className="logo text-center relative">
+                <div className="house-icon mt-2 md:mt-4 flex justify-center">
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{
+                      delay: 0.5,
+                      type: "spring",
+                      stiffness: 200,
+                    }}
+                  >
+                    <div className="w-32 h-32 md:w-48 md:h-48 relative mx-auto">
+                      <img
+                        src="/bbps-logo.png"
+                        alt="BBPS Logo"
+                        className="w-full h-full object-contain object-top"
+                        style={{
+                          clipPath: "inset(0 0 5%)",
+                          transform: "scale(0.9)",
+                        }}
+                      />
+                    </div>
+                  </motion.div>
+                </div>
+              </div>
+            </div>
 
-          {/* Modified scroll indicator with better visibility */}
+            <div className="right-section w-full md:w-3/5 pl-0 md:pl-6 md:border-l border-gray-700 flex flex-col items-center">
+              {/* Contact info with mobile adjustments */}
+              <div className="contact-info space-y-2 md:space-y-3 flex flex-col items-center text-sm md:text-base">
+                {/* Your existing contact info mapping... */}
+              </div>
+            </div>
+          </div>
+
+          {/* Scroll indicator with mobile adjustments */}
           <motion.div
-            className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-white/70"
+            className="absolute bottom-2 md:bottom-6 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-white/70"
             initial={{ opacity: 0 }}
             animate={{ opacity: [0.5, 1, 0.5] }}
             transition={{ repeat: Infinity, duration: 2 }}
             style={{ willChange: 'opacity', transform: 'translateZ(0)' }}
           >
-            <p className="text-sm mb-2">Scroll down to explore</p>
+            <p className="text-xs md:text-sm mb-1 md:mb-2">Scroll to explore</p>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 animate-bounce"
+              className="h-4 w-4 md:h-5 md:w-5 animate-bounce"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
