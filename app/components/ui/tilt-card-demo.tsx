@@ -459,14 +459,13 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                           <div className="absolute -top-8 -left-8 w-32 h-32 rounded-full bg-gradient-to-r from-purple-500/10 to-blue-500/10 blur-xl"></div>
                         </div>
 
-                        {/* Contact BBPS button with improved structure */}
-                        <div className="absolute bottom-8 left-[45%] z-[9999] pointer-events-auto">
+                        {/* Contact BBPS button with similar structure to flip button */}
+                        <div className="absolute bottom-8 left-[45%] transform -translate-x-1/2">
                           <button
                             onClick={() => window.open('https://www.bigbropros.com/', '_blank', 'noopener,noreferrer')}
-                            className="relative inline-flex items-center justify-center px-5 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm rounded-lg font-medium hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-center cursor-pointer"
-                            style={{ position: 'relative', zIndex: 9999 }}
+                            className="relative px-5 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm rounded-lg font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg"
                           >
-                            <span className="relative z-[9999]">Contact BBPS</span>
+                            Contact BBPS
                           </button>
                         </div>
 
@@ -578,14 +577,13 @@ export function TiltCardDemo({ title = "BBPS Digital Business Card" }) {
                           </div>
                         </div>
 
-                        {/* Contact BBPS button with improved structure */}
-                        <div className="absolute bottom-8 left-[45%] z-[9999] pointer-events-auto">
+                        {/* Contact BBPS button with similar structure to flip button */}
+                        <div className="absolute bottom-8 left-[45%] transform -translate-x-1/2">
                           <button
                             onClick={() => window.open('https://www.bigbropros.com/', '_blank', 'noopener,noreferrer')}
-                            className="relative inline-flex items-center justify-center px-5 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm rounded-lg font-medium hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-center cursor-pointer"
-                            style={{ position: 'relative', zIndex: 9999 }}
+                            className="relative px-5 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm rounded-lg font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg"
                           >
-                            <span className="relative z-[9999]">Contact BBPS</span>
+                            Contact BBPS
                           </button>
                         </div>
 
